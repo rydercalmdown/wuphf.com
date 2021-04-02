@@ -1,0 +1,78 @@
+{% load static %}
+<form action="{% url 'home' %}" method="POST">
+  {% csrf_token %}
+
+
+  <div class="row">
+    <div class="col-9 p-4">
+
+
+      <div class="form-group">
+        <label for="recipient">To</label>
+        <select class="form-control" id="recipient" name="receiver">
+          {% for recipient in recipients %}
+          <option value="{{ recipient.id }}">{{ recipient.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="sender">Sender (Your Name)</label>
+        <input type="text" name="sender" class="form-control" id="sender" aria-describedby="senderHelp"
+          placeholder="Michael Scott">
+        <small id="senderHelp" class="form-text text-muted">Maximum 20 characters.</small>
+      </div>
+      <div class="form-group">
+        <label for="wuphfText">Message</label>
+        <input type="text" name="message" class="form-control" id="wuphfText" aria-describedby="wuphfTextHelp"
+          placeholder="Dwight, you ignorant slut.">
+        <small id="wuphfTextHelp" class="form-text text-muted">Enter the message to send, 100 character limit.</small>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Send WUPHF</button>
+
+    </div>
+
+    <div class="col-3 p-4 bg-orange">
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked name="homePhone" id="homePhone">
+        <label class="form-check-label wuphf-label" for="homePhone">
+          Home Phone
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked name="cellPhone" id="cellPhone">
+        <label class="form-check-label wuphf-label" for="cellPhone">
+          Cell Phone
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked name="facebook" id="facebook">
+        <label class="form-check-label wuphf-label" for="facebook">
+          Facebook
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked name="twitter" id="twitter">
+        <label class="form-check-label wuphf-label" for="twitter">
+          Twitter
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked name="homeScreen" id="homeScreen">
+        <label class="form-check-label wuphf-label" for="homeScreen">
+          Home Screen
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" checked name="email" id="email">
+        <label class="form-check-label wuphf-label" for="email">
+          Email
+        </label>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</form>

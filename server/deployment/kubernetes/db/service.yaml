@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wuphf-postgres
+  labels:
+    app: wuphf
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: wuphf
+    tier: postgres

@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: wuphf-web
+  labels:
+    app: wuphf-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wuphf-web
+    spec:
+      containers:
+      - name: wuphf-web
+        image: radicalsloth/wuphf
+        imagePullPolicy: Always
+        env:
+          - name: DJANGO_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: wuphf-secrets
+                key: django_secret_key
+          - name: TWILIO_ACCOUNT_SID
+            valueFrom:
+              secretKeyRef:
+                name: wuphf-secrets
+                key: twilio_account_sid
+          - name: TWILIO_AUTH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: wuphf-secrets
+                key: twilio_auth_token
+          - name: TWILIO_PHONE_NUMBER
+            valueFrom:
+              secretKeyRef:
+                name: wuphf-secrets
+                key: twilio_phone_number
+          - name: DJANGO_SETTINGS_MODULE
+            value: "wuphf.settings_live"
+          - name: POSTGRES_HOST
+            value: "wuphf-postgres.default.svc.cluster.local"
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: wuphf-secrets
+                key: postgres_username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: wuphf-secrets
+                key: postgres_password
+          - name: POSTGRES_PORT
+            value: "5432"
+          - name: POSTGRES_NAME
+            value: "postgres"
+        ports:
+        - containerPort: 8000

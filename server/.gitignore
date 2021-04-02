@@ -1,0 +1,6 @@
+*.pyc
+**/.DS_Store
+**/secret*.yaml
+src/static
+**/__pycache__
+data
